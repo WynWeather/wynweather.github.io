@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <h>Please Go Into The Inspect Element Console To See</h>
+<head>
+    <meta charset="utf-8" />
+    <title>WynWeather</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <script defer src="https://cdn.aerisapi.com/sdk/js/latest/aerisweather.min.js"></script>
+
+</head>
+<body>
+
+    <script>
+    window.addEventListener('load', () => {
+
+        const aeris = new AerisWeather('EtMx9JSoKBo0lxYvbjmg7', 'undefined');
+
+        const request = aeris.api()
+			.endpoint('forecasts')
+			.place(':auto')
+			.format('json')
+			.filter('day')
+			.limit(7)
+			.fields('periods.dateTimeISO,loc,periods.maxTempF,periods.maxTempC,periods.minTempF,periods.minTempC,periods.weather,periods.maxHumidity,periods.minHumidity,periods.minFeelslikeC,periods.minFeelslikeF,periods.maxFeelslikeC,periods.maxFeelslikeF');
+        request.get().then((result) => {
+            console.log(result);
+        });
+    });
+    </script>
+
+</body>
+</html>
